@@ -1,8 +1,36 @@
+<style>
+
+:root {
+  --primary-color: #fff;
+  --background-color: #e5e5e5;
+  --text-color: #2d2d2d;
+  
+  font-family: Arial, Helvetica, sans-serif;
+  padding:20px;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.card {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+.header {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+</style>
+
+
 <div id="output">
 
 <h2>
 
-Order of the day
+Meeting Order
 
 </h2>
 
@@ -56,10 +84,10 @@ function mulberry32(a) {
 
 const current = new Date();
 
-var seedstring = current.getFullYear()+current.getMonth()+current.getDay();
+var seedstring = current.getFullYear()+ "-" + current.getMonth()+ "-" +current.getDate();
 
 // Create cyrb128 state:
-var seed = cyrb128("aapples");
+var seed = cyrb128(seedstring);
 // Four 32-bit component hashes provide the seed for sfc32.
 var rand = sfc32(seed[0], seed[1], seed[2], seed[3]);
 
@@ -78,7 +106,7 @@ var randarray = [];
  
 
 
-document.write(current)
+document.write("for the day of "+seedstring)
 
  
 
