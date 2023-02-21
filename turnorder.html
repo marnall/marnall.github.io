@@ -1,44 +1,38 @@
-<style>
+<!-- Simple random ordering of an array example. 2023 no rights reserved. -->
 
+<style>
 :root {
   --primary-color: #fff;
   --background-color: #e5e5e5;
   --text-color: #2d2d2d;
-  
   font-family: Arial, Helvetica, sans-serif;
   padding:20px;
 }
-
 body {
   background-color: var(--background-color);
   color: var(--text-color);
 }
-
 .card {
   background-color: var(--primary-color);
   color: var(--text-color);
 }
-
 .header {
   background-color: var(--primary-color);
   color: var(--text-color);
 }
 </style>
 
-
 <div id="output">
-
-<h2>
-
-Meeting Order
-
-</h2>
-
+	<h2>
+		Meeting Order
+	</h2>
 </div>
 
 
 <script>
-// Clipped from bryc's answer at  https://stackoverflow.com/questions/521295/seeding-the-random-number-generator-in-javascript/47593316#47593316
+
+// Pseudorandom number generator taken from bryc's answer at  https://stackoverflow.com/questions/521295/seeding-the-random-number-generator-in-javascript/47593316#47593316
+// includes cyrb128,sfc32,mulberry32
 function cyrb128(str) {
     let h1 = 1779033703, h2 = 3144134277,
         h3 = 1013904242, h4 = 2773480762;
@@ -55,7 +49,6 @@ function cyrb128(str) {
     h4 = Math.imul(h2 ^ (h4 >>> 19), 2716044179);
     return [(h1^h2^h3^h4)>>>0, (h2^h1)>>>0, (h3^h1)>>>0, (h4^h1)>>>0];
 }
-
 function sfc32(a, b, c, d) {
     return function() {
       a >>>= 0; b >>>= 0; c >>>= 0; d >>>= 0; 
@@ -69,7 +62,6 @@ function sfc32(a, b, c, d) {
       return (t >>> 0) / 4294967296;
     }
 }
-
 function mulberry32(a) {
     return function() {
       var t = a += 0x6D2B79F5;
@@ -78,37 +70,33 @@ function mulberry32(a) {
       return ((t ^ t >>> 14) >>> 0) / 4294967296;
     }
 }
-
-// set up mulberry with seed stolen from stackoverflow:
-
-
+// Prepare seed based on today's date
 const current = new Date();
 
-var seedstring = current.getFullYear()+ "-" + current.getMonth()+ "-" +current.getDate();
+// month starts from index 0
+var month = current.getMonth()+1;
+
+// add the filler zero
+if (month < 10){
+	month = '0'+month;
+}
+
+var seedstring = current.getFullYear()+ "-" + month + "-" +current.getDate();
 
 // Create cyrb128 state:
 var seed = cyrb128(seedstring);
 // Four 32-bit component hashes provide the seed for sfc32.
 var rand = sfc32(seed[0], seed[1], seed[2], seed[3]);
-
 // Only one 32-bit component hash is needed for mulberry32.
 var rand = mulberry32(seed[0]);
-
 // Obtain sequential random numbers like so:
 rand();
 rand();
 
-
+// array to randomize
 var arrStr = ['Justin', 'Marvin', 'Andrew', 'Thomas', 'Vincent', 'Vittorio'];
 
-var randarray = [];
-
- 
-
-
 document.write("for the day of "+seedstring)
-
- 
 
 document.write("<h2><ol>")
 document.write("<li>Bernard</li>")
@@ -117,11 +105,6 @@ while (arrStr.length) {
     document.write("<li>"+arrStr.splice((rand() * arrStr.length), 1) + '</li>');
 
 }
-
 document.write("</ol></h2>")
-
- 
-
- 
 
 </script>
