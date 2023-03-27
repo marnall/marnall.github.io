@@ -1,0 +1,51 @@
+<!-- Simple Base64 Encode and Decode. 2023 no rights reserved. -->
+
+<style>
+:root {
+  --primary-color: #fff;
+  --background-color: #e5e5e5;
+  --text-color: #2d2d2d;
+  font-family: Arial, Helvetica, sans-serif;
+  padding:20px;
+}
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+.card {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+.header {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+</style>
+
+<div id="output">
+	<h2>
+		URL Encoder/Decoder
+	</h2>
+	<p>
+		<textarea id="regular" rows="10" cols="120"></textarea>
+	</p>
+	<p>
+		<button type="button" onclick="encode()">Encode TO URL</button> | <button type="button" onclick="decode()">Decode FROM URL</button>
+	</p>
+	<p>
+		<textarea id="url" rows="10" cols="120"></textarea>
+	</p>
+</div>
+
+
+<script>
+function encode(){
+	document.getElementById('url').value = encodeURIComponent(document.getElementById('regular').value)	
+	return;
+}
+
+function decode(){
+	document.getElementById('regular').value = decodeURIComponent(document.getElementById('url').value)
+	return;
+}
+</script>
