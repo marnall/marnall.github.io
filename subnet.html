@@ -1,0 +1,67 @@
+<!-- Simple check if ip is in subnet. -->
+
+<style>
+:root {
+  --primary-color: #fff;
+  --background-color: #e5e5e5;
+  --text-color: #2d2d2d;
+  font-family: Arial, Helvetica, sans-serif;
+  padding:20px;
+}
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+.card {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+.header {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+</style>
+
+<head>
+    <title>IP Subnet Check</title>
+</head>
+
+<div id="output">
+	<h2>
+		Is IP in Subnet checker
+	</h2>
+	<p>
+		<input type="text" id="ip">
+		<input type="text" id="subnet">
+	</p>
+	<p>
+		<button type="button" onclick="isIPAddressInSubnet()">Check if IP is in subnet</button> 
+	</p>
+    <p>
+        Result: <h3><div id="result">...</div></h3>
+    </p>
+</div>
+
+
+<script>
+function isIPAddressInSubnet() {
+    
+  const ip = document.getElementById('ip').value.split('.');
+
+  const net = document.getElementById('subnet').value.split('/');
+
+  const netMaskBits = parseInt(net[1]);
+  const netMask = netMaskBits === 0 ? 0 : (~0 << (32 - netMaskBits));
+  console.log(ip);
+  console.log(net);
+  const netAddress = net[0].split('.').reduce((acc, curr) => (acc << 8) + parseInt(curr), 0);
+
+  const ipInt = ip.reduce((acc, curr) => (acc << 8) + parseInt(curr), 0);
+
+
+  document.getElementById('result').innerHTML = (ipInt & netMask) === netAddress;
+  return 0;
+}
+
+
+</script>

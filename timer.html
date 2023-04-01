@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Timer</title>
+</head>
+<body>
+  <h1>Timer</h1>
+  <p>Time elapsed: <span id="timer">0:00</span></p>
+  <button id="start-btn" onclick="startTimer()">Start</button>
+  <button id="stop-btn" onclick="stopTimer()">Stop</button>
+  <button id="reset-btn" onclick="reset()">Reset</button>
+
+  <script>
+    let startTime = 0;
+    let timerInterval;
+
+    function startTimer() {
+      startTime = Date.now();
+      timerInterval = setInterval(updateTimer, 1000);
+    }
+
+    function stopTimer() {
+      clearInterval(timerInterval);
+    }
+
+    function updateTimer() {
+      const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+      const minutes = Math.floor(elapsedTime / 60);
+      const seconds = elapsedTime % 60;
+      document.getElementById("timer").innerHTML = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    function reset(){
+        document.getElementById("timer").innerHTML = "0:00";
+    }
+
+  </script>
+</body>
+</html>
