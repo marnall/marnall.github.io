@@ -96,13 +96,32 @@ rand();
 // array to randomize
 var arrStr = ['Justin', 'Marvin', 'Andrew', 'Thomas', 'Vincent', 'Vittorio'];
 
-document.write("for the day of "+seedstring)
+document.write("For the day of "+seedstring+":")
 
 document.write("<h2><ol>")
-document.write("<li>Bernard</li>")
+document.write("<li>Bernard (10:00-10:20)</li>")
+var min = 20;
+var hr = 10;
+var z = '';
+
 while (arrStr.length) {
 
-    document.write("<li>"+arrStr.splice((rand() * arrStr.length), 1) + '</li>');
+    document.write("<li>"+arrStr.splice((rand() * arrStr.length), 1) + ' ('+hr+':' + min);
+	
+	min = min + 10;
+	if(min==60){
+	min=0;
+	hr = 11;
+	}
+	if(min < 10){
+	z = 0;
+	}
+	else{
+	z = '';
+	}
+	
+	document.write('-'+hr+':'+(z)+(min)+')</li>')
+	
 
 }
 document.write("</ol></h2>")
