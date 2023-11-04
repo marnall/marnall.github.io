@@ -106,19 +106,20 @@ var z = '';
 
 while (arrStr.length) {
 
-    document.write("<li>"+arrStr.splice((rand() * arrStr.length), 1) + ' ('+hr+':' + min);
+	//Add a 0 prefix to ensure double digit minutes
+	if(min < 10){z = 0;}
+	else{z = '';}
+
+    document.write("<li>"+arrStr.splice((rand() * arrStr.length), 1) + ' ('+hr+':' + z+min);
 	
 	min = min + 10;
 	if(min==60){
 	min=0;
 	hr = 11;
 	}
-	if(min < 10){
-	z = 0;
-	}
-	else{
-	z = '';
-	}
+	//Add a 0 prefix to ensure double digit minutes
+	if(min < 10){z = 0;}
+	else{z = '';}
 	
 	document.write('-'+hr+':'+(z)+(min)+')</li>')
 	
