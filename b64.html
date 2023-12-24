@@ -20,6 +20,34 @@ body {
   background-color: var(--primary-color);
   color: var(--text-color);
 }
+
+button {
+  background: #04AA6D;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  padding: 25px 30px 25px 70px;
+  font-size: 20px;
+  margin-right: 20px;
+}
+
+.up-button button {
+  background: #04AA6D url("img/uparrow.png");
+  background-position: 10px;
+  background-repeat: no-repeat;
+}
+
+.down-button button {
+  background: #04AA6D url("img/downarrow.png");
+  background-position: 10px;
+  background-repeat: no-repeat;
+
+}
+
+#buttonrow {
+	width:100%;
+}
+
 </style>
 
 <div id="output">
@@ -30,7 +58,14 @@ body {
 		<textarea id="regular" rows="10" cols="120"></textarea>
 	</p>
 	<p>
-		<button type="button" onclick="encode()">Encode TO B64</button> | <button type="button" onclick="decode()">Decode FROM B64</button>
+	<div id="buttonrow">
+		<span class="down-button">
+			<button type="button" onclick="encode()">Encode TO B64</button> 
+		</span>
+		<span class="up-button">
+			<button type="button" onclick="decode()">Decode FROM B64</button> 
+		</span>
+	</div>
 	</p>
 	<p>
 		<textarea id="base64" rows="10" cols="120"></textarea>
@@ -51,7 +86,7 @@ function decode(){
 /**
 *
 *  Base64 encode / decode
-*  http://www.webtoolkit.info/
+*  From http://www.webtoolkit.info/
 *
 **/
 var Base64 = {
